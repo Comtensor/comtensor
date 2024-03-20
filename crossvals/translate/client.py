@@ -8,9 +8,9 @@ from dotenv import load_dotenv, find_dotenv
 
 languages_list = LANGUAGE_MAPPING.values()
 
-HOST = os.environ.get("HOST_ADDRESS")
-PORT = int(os.environ.get("PORT"))
-API_URL = f"http://{HOST}:{PORT}/prompting"
+# HOST = os.environ.get("HOST_ADDRESS")
+# PORT = int(os.environ.get("PORT"))
+# API_URL = f"http://{HOST}:{PORT}/prompting"
 
 
 def get_key_from_value(my_dict, value):
@@ -52,18 +52,11 @@ def input_changed(source_language):
 
 
 with gr.Blocks() as demo:
-  gr.HTML("""<html>
-    <head>
-      <style>
-        h1 {
-          text-align: center;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Comtensor Translate</h1>
-    </body>
-  </html>""")
+  
+  title = """<h1 align="center">Comtensor Translate (Subnet 02)</h1>"""
+  theme = gr.themes.Default(primary_hue="green")      
+  gr.HTML(title)
+
   with gr.Row():
     with gr.Column():
       source_language_dropdown = gr.Dropdown(choices=languages_list, value="English", label="Source Language")
@@ -78,4 +71,4 @@ with gr.Blocks() as demo:
   btn.click(translate, inputs=[input_textbox, source_language_dropdown, target_language_dropdown], outputs=[translated_textbox, info_label])
 
 if __name__ == "__main__":
-  demo.queue(max_size=20, api_open=False).launch(share=False)
+  demo.queue(max_size=20, api_open=False).launch(share=True)
