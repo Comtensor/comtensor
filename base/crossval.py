@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import bittensor as bt
 import threading
+import time
 class BaseCrossval(ABC):
         
     def __init__(self, netuid = 1, wallet_name = None, wallet_hotkey = None, network = "finney", topk = 10, subtensor = None):
@@ -21,6 +22,7 @@ class BaseCrossval(ABC):
         self.top_miners = self.get_top_mienrs()
         self.block = self.subtensor.block
         self.is_thread_running = False
+        # self.run_background_thread()
     # def query(self):
     #     ...
     #     # TODO: Developer have to implement this method to query the miner
@@ -73,10 +75,13 @@ class BaseCrossval(ABC):
         return top_miners
     def run_thread(self):
         while True:
-            if self.subtensor.block - self.block > 2:
-                self.resync_metagraph()
-                self.top_miners = self.get_top_mienrs()
-
+            self.resync_metagraph()
+            self.top_miners = self.get_top_mienrs()
+            self.run_custom_thread()
+            self.block = self.subtensor.block
+            time.sleep(120)
+    def run_custom_thread(self):
+        ...
     def run_background_thread(self):
         if not self.is_thread_running:
             self.thread = threading.Thread(target=self.run_thread)
