@@ -40,15 +40,12 @@ with gr.Blocks() as demo:
 </html>""")
     with gr.Row():
         with gr.Column():
-            source_language_dropdown = gr.Dropdown(choices=source_languages,
-                                                   value="Auto Detect",
-                                                  label="Source Language")
+            source_language_dropdown = gr.Dropdown(choices=source_languages, value="Auto Detect", label="Source Language")
             input_textbox = gr.Textbox(lines=5, placeholder="Enter text to translate", label="Input Text")
         with gr.Column():
-            target_language_dropdown = gr.Dropdown(choices=["English", "French", "Spanish"],
-                                                   value="English",
-                                                   label="Target Language")
+            target_language_dropdown = gr.Dropdown(choices=["English", "French", "Spanish"], value="English", label="Target Language")
             translated_textbox = gr.Textbox(lines=5, placeholder="", label="Translated Text")
+            
     info_label = gr.HTML("")
     btn = gr.Button("Translate")
     source_language_dropdown.change(input_changed, inputs=[source_language_dropdown, input_textbox], outputs=[source_language_dropdown, target_language_dropdown])
