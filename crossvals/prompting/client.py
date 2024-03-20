@@ -89,13 +89,11 @@ def predict(inputs, chat_counter, chatbot, history, request:gr.Request):
 def reset_textbox():
     return gr.update(value='', interactive=False), gr.update(interactive=False)
 
-title = """<h1 align="center">Bittensor Prompting (Subnet 01)</h1>"""
+title = """<h1 align="center">Comtensor Prompting (Subnet 01)</h1>"""
 
 theme = gr.themes.Default(primary_hue="green")                
 
-with gr.Blocks(css = """#col_container { margin-left: auto; margin-right: auto;}
-                #chatbot {height: 520px; overflow: auto;}""",
-              theme=theme) as demo:
+with gr.Blocks(css = """#col_container { margin-left: auto; margin-right: auto;} #chatbot {height: 520px; overflow: auto;}""", theme=theme) as demo:
     gr.HTML(title)
     with gr.Column(elem_id = "col_container", visible=True) as main_block:
 
