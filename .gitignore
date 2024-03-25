@@ -163,3 +163,4 @@ cython_debug/
 #.idea/
 
 tensorage-db
+crossvals/trading/mining/received_signals
