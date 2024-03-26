@@ -42,7 +42,7 @@ class TargonCrossval(SynapseBasedCrossval):
 
 scrape_crossval = TargonCrossval()
 input = {
-    "sources": 'Hello, this is targon',
+    "sources": '',
     "query" : "what is targon?"
 }
 print(scrape_crossval.run(input))
