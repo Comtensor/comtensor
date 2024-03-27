@@ -1,8 +1,11 @@
 import json
 import random
 from typing import List, Optional, Annotated, TypeAlias
-
+from PIL import Image
 from pydantic import BaseModel, Field
+from io import BytesIO
+import base64
+import bittensor as bt
 
 
 DEFAULT_WIDTH = 768
@@ -40,3 +43,34 @@ class ImageGenerationOutput(BaseModel):
 class ValidationInputs(BaseModel):
     input_parameters: ImageGenerationInputs
     frames: Frames
+
+def load_base64_image(data: bytes) -> Image.Image:
+    return Image.open(BytesIO(base64.b64decode(data)))
+
+
+class NeuronInfoSynapse(bt.Synapse):
+    is_validator: Optional[bool] = None
+
+
+class ImageGenerationSynapse(bt.Synapse):
+    inputs: ImageGenerationInputs
+    output: Optional[ImageGenerationOutput]
+
+
+class MinerGenerationOutput(BaseModel):
+    images: List[bytes]
+    process_time: float
+    miner_uid: int
+    miner_hotkey: str
+
+
+class ImageGenerationClientSynapse(bt.Synapse):
+    inputs: ImageGenerationInputs
+    miner_uid: int | None
+    output: MinerGenerationOutput | None
+
+    def deserialize(self) -> List[Image.Image]:
+        f"""
+        Assumes the {self.output} field is filled by axon
+        """
+        return [load_base64_image(data) for data in self.output.images]
