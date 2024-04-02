@@ -53,7 +53,7 @@ if __name__ == "__main__":
     if response.status_code == 200:
         print("POST request was successful.")
         print("Response:")
-        print(response.json())  # Print the response data
+        print("success:",response.json())  # Print the response data
     else:
         print(response.__dict__)
         print("POST request failed with status code:", response.status_code)

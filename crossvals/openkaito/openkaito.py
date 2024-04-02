@@ -41,4 +41,4 @@ class OpenkaitoCrossval(SynapseBasedCrossval):
 
 openkaito_crossval = OpenkaitoCrossval()
 
-print(openkaito_crossval.run("BTC"))
+print("success:",openkaito_crossval.run("BTC"))

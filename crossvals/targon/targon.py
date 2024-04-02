@@ -45,4 +45,4 @@ input = {
     "sources": '',
     "query" : "what is targon?"
 }
-print(scrape_crossval.run(input))
+print("success:",scrape_crossval.run(input))

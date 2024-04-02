@@ -49,4 +49,4 @@ class ImageAIchemyCrossval(SynapseBasedCrossval):
 
 aichemy_crossval = ImageAIchemyCrossval()
 
-print(aichemy_crossval.run('Make the apple'))
+print("success:",aichemy_crossval.run('Make the apple'))

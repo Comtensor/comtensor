@@ -32,4 +32,4 @@ class PromptingCrossval(SynapseBasedCrossval):
 
 prompting_crossval = PromptingCrossval()
 
-print(prompting_crossval.run("What is the comtensor?"))
+print("success:",prompting_crossval.run("What is the comtensor?"))

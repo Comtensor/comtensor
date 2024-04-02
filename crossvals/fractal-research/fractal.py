@@ -47,4 +47,4 @@ params = {
     'seed': 10
 }
 
-print(fractal_crossval.run(p_input, params))
+print("success:",fractal_crossval.run(p_input, params))

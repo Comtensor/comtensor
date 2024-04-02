@@ -60,4 +60,4 @@ class ComputeCrossval(SynapseBasedCrossval):
 compute_crossval = ComputeCrossval()
 
 
-print(compute_crossval.run())
+print("success:",compute_crossval.run())

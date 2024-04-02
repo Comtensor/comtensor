@@ -34,4 +34,4 @@ class ItsAICrossval(SynapseBasedCrossval):
 
 itsai_crossval = ItsAICrossval()
 
-print(itsai_crossval.run("This is it's AI."))
+print("success:",itsai_crossval.run("This is it's AI."))

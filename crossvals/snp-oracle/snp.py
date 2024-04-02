@@ -44,4 +44,4 @@ class SnpOracleCrossval(SynapseBasedCrossval):
 
 snp_crossval = SnpOracleCrossval()
 
-print(snp_crossval.run())
+print("success:",snp_crossval.run())
