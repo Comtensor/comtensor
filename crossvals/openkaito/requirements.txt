@@ -1,0 +1,4 @@
+bittensor
+fastapi
+pydantic
+uvicorn
