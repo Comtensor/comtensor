@@ -19,7 +19,7 @@ from crossvals.compute.utils import (
 
 class ComputeCrossval(SynapseBasedCrossval):
 
-    def __init__(self, netuid = 29, wallet_name = 'my_wallet', wallet_hotkey = 'my_first_hotkey', network = "finney", topk = 1):
+    def __init__(self, netuid = 27, wallet_name = 'my_wallet', wallet_hotkey = 'my_first_hotkey', network = "finney", topk = 1):
 
         super().__init__(netuid, wallet_name, wallet_hotkey, network, topk)
 
