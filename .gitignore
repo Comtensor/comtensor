@@ -8,6 +8,8 @@ __pycache__/
 my-env/
 crossvals/healthcare/cache/
 crossvals/healthcare/model/
+crossvals/myshell/model/
+crossvals/myshell/cache/
 
 # Distribution / packaging
 .Python
