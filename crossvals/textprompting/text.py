@@ -8,7 +8,7 @@ from typing import List
 from crossvals.textprompting.protocol import StreamPromptingSynapse, PromptingSynapse
 import asyncio
 class TextPromtingCrossValidator(SynapseBasedCrossval):
-    def __init__(self, netuid = 1, wallet_name = 'NI', wallet_hotkey = 'ni', network = "finney", topk = 1):
+    def __init__(self, netuid = 1, wallet_name = 'default', wallet_hotkey = 'default', network = "finney", topk = 1):
         super().__init__(netuid, wallet_name, wallet_hotkey, network, topk)
         self.dendrite = bt.dendrite( wallet = self.wallet )
         print([item['uid'] for item in self.top_miners])
