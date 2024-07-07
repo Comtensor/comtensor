@@ -254,7 +254,7 @@ async def prompting(item: PropmtItem):
 #         print(data)
 #         await asyncio.sleep(1)
 
-subtensor = bt.subtensor(network = "local")
+subtensor = bt.subtensor()
 
 translate_crossval = TranslateCrossValidator(subtensor=subtensor)
 healthcare_crossval = HealthcareCrossval(netuid = 31, topk = 1, subtensor=subtensor)
