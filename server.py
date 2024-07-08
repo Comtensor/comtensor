@@ -121,7 +121,7 @@ class VisionItem(BaseModel):
 
 @app.get("/")
 def read_root():
-    return translate_crossval.run("Hello, how are you?")
+    return "Greetings from comtensor team!"
 
 @app.post("/translate/", tags=["Testnet"])
 def tranlsate_item(item: TranslateItem):
