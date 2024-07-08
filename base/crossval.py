@@ -19,7 +19,7 @@ class BaseCrossval(ABC):
         bt.logging.info(f"Syncing metagraph on netuid: {self.netuid}")
         self.metagraph = self.subtensor.metagraph(netuid = self.netuid)
         self.topk = topk
-        self.top_miners = self.get_top_mienrs()
+        self.top_miners = self.get_top_miners()
         self.block = self.subtensor.block
         self.is_thread_running = False
         # self.run_background_thread()
@@ -39,7 +39,7 @@ class BaseCrossval(ABC):
         if self.metagraph.hotkeys[self.wallet.hotkey.ss58_address].stake < 1:
             raise Exception("Wallet not staked with enough stake.")
 
-    def get_top_mienrs(self):
+    def get_top_miners(self):
         """Get top K miners from metagraph"""
 
 
@@ -76,7 +76,7 @@ class BaseCrossval(ABC):
     def run_thread(self):
         while True:
             self.resync_metagraph()
-            self.top_miners = self.get_top_mienrs()
+            self.top_miners = self.get_top_miners()
             self.run_custom_thread()
             self.block = self.subtensor.block
             time.sleep(120)

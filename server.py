@@ -46,12 +46,12 @@ app.add_middleware(
 
 # healthcare_crossval.run_background_thread()
 
-class TranlsateItem(BaseModel):
+class TranslateItem(BaseModel):
     text: str
     source_lang: str = "en"
     target_lang: str = "es"
     timeout: int = None
-class PropmtItem(BaseModel):
+class PromptItem(BaseModel):
     roles: list[str] = ["user", "assistant"]
     messages: list[str] = [
         "What's the weather like today?",
@@ -124,7 +124,7 @@ def read_root():
     return translate_crossval.run("Hello, how are you?")
 
 @app.post("/translate/", tags=["Testnet"])
-def tranlsate_item(item: TranlsateItem):
+def tranlsate_item(item: TranslateItem):
     
     translate_crossval.setLang(item.source_lang, item.target_lang)
     if item.timeout:
@@ -238,7 +238,7 @@ async def upload_image(image: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/prompting/", tags=["Mainnet"])
-async def prompting(item: PropmtItem):
+async def prompting(item: PromptItem):
     return await promtingCrossval.run(item)
 
 # @app.websocket("/textprompting")

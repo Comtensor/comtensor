@@ -17,12 +17,13 @@
 # DEALINGS IN THE SOFTWARE.
 
 import typing
+import typing_extensions
 import bittensor as bt
 from pydantic import BaseModel, Field
 
 
 # TODO: move AllocInfo elsewhere?
-class AllocInfo(typing.TypedDict):
+class AllocInfo(typing_extensions.TypedDict):
     apy: str
     allocations: typing.Dict[str, float]
 
