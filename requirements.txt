@@ -8,3 +8,6 @@ Pillow
 pytube
 python-multipart
 httpx
+torch
+typing_extensions
+wandb

@@ -30,10 +30,10 @@
     ```bash
     apt install python3.10-venv
     python3 -m venv my-env
-    . my-env/bin/activate
+    source my-env/bin/activate
     ```
 
-3. Install dependancies
+3. Install dependencies
 
     ```bash
     python3 -m pip install -e .

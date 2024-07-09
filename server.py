@@ -39,19 +39,19 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # healthcare_crossval.run_background_thread()
 
-class TranlsateItem(BaseModel):
+class TranslateItem(BaseModel):
     text: str
     source_lang: str = "en"
     target_lang: str = "es"
     timeout: int = None
-class PropmtItem(BaseModel):
+class PromptItem(BaseModel):
     roles: list[str] = ["user", "assistant"]
     messages: list[str] = [
         "What's the weather like today?",
@@ -121,10 +121,10 @@ class VisionItem(BaseModel):
 
 @app.get("/")
 def read_root():
-    return translate_crossval.run("Hello, how are you?")
+    return "Greetings from comtensor team!"
 
 @app.post("/translate/", tags=["Testnet"])
-def tranlsate_item(item: TranlsateItem):
+def translate_item(item: TranslateItem):
     
     translate_crossval.setLang(item.source_lang, item.target_lang)
     if item.timeout:
@@ -238,7 +238,7 @@ async def upload_image(image: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/prompting/", tags=["Mainnet"])
-async def prompting(item: PropmtItem):
+async def prompting(item: PromptItem):
     return await promtingCrossval.run(item)
 
 # @app.websocket("/textprompting")
@@ -246,7 +246,7 @@ async def prompting(item: PropmtItem):
 #     print("sdf")
 #     await websocket.accept()
 #     # data = await websocket.receive_text()
-#     streamingResponse = textpromtingCrossval.run()
+#     streamingResponse = textpromptingCrossval.run()
 #     while True:
 #         print("tread_running...")
 #         data = await streamingResponse[0].__anext__()
@@ -254,7 +254,7 @@ async def prompting(item: PropmtItem):
 #         print(data)
 #         await asyncio.sleep(1)
 
-subtensor = bt.subtensor(network = "local")
+subtensor = bt.subtensor()
 
 translate_crossval = TranslateCrossValidator(subtensor=subtensor)
 healthcare_crossval = HealthcareCrossval(netuid = 31, topk = 1, subtensor=subtensor)
