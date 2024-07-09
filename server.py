@@ -38,8 +38,8 @@ app = FastAPI()
 # Enable all cross-origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://comtensor.io"],
-    allow_credentials=False,
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
