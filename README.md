@@ -33,7 +33,7 @@
     source my-env/bin/activate
     ```
 
-3. Install dependancies
+3. Install dependencies
 
     ```bash
     python3 -m pip install -e .

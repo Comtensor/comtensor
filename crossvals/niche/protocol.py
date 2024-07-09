@@ -51,12 +51,12 @@ class ImageGenerating(bt.Synapse):
     request_dict: dict = pydantic.Field(
         default={},
         title="Dictionary contains request",
-        description="Dict contains arbitary information",
+        description="Dict contains arbitrary information",
     )
     response_dict: dict = pydantic.Field(
         default={},
         title="Dictionary contains response",
-        description="Dict contains arbitary information",
+        description="Dict contains arbitrary information",
     )
     image: str = pydantic.Field(
         default="",
@@ -101,7 +101,7 @@ class ImageGenerating(bt.Synapse):
 class TextGenerating(bt.Synapse):
     # Required request input, filled by sending dendrite caller.
     prompt_input: str = ""
-    # Optional request output, filled by recieving axon.
+    # Optional request output, filled by receiving axon.
     seed: int = 0
     request_dict: dict = {}
     model_name: str = ""

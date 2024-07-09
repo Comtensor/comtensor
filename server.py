@@ -124,7 +124,7 @@ def read_root():
     return "Greetings from comtensor team!"
 
 @app.post("/translate/", tags=["Testnet"])
-def tranlsate_item(item: TranslateItem):
+def translate_item(item: TranslateItem):
     
     translate_crossval.setLang(item.source_lang, item.target_lang)
     if item.timeout:
@@ -246,7 +246,7 @@ async def prompting(item: PromptItem):
 #     print("sdf")
 #     await websocket.accept()
 #     # data = await websocket.receive_text()
-#     streamingResponse = textpromtingCrossval.run()
+#     streamingResponse = textpromptingCrossval.run()
 #     while True:
 #         print("tread_running...")
 #         data = await streamingResponse[0].__anext__()
