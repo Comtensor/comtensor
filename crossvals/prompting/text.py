@@ -7,6 +7,7 @@ import pydantic
 from typing import List
 from crossvals.prompting.protocol import StreamPromptingSynapse, PromptingSynapse
 import asyncio
+
 class PromtingCrossValidator(SynapseBasedCrossval):
     def __init__(self, netuid = 1, wallet_name = 'default', wallet_hotkey = 'default', network = "finney", topk = 1, subtensor = None):
         super().__init__(netuid, wallet_name, wallet_hotkey, network, topk, subtensor)
@@ -61,13 +62,14 @@ class PromtingCrossValidator(SynapseBasedCrossval):
         return response
     
 async def main():
-    textpromtingCrossval = PromtingCrossValidator()
-    streamingResponse = textpromtingCrossval.run()
+    textpromptingCrossval = PromtingCrossValidator()
+    streamingResponse = textpromptingCrossval.run()
     while True:
         data = await streamingResponse[0].__anext__()
         print(data)
         await asyncio.sleep(1)
     # print(translate_crossval.run("Hello, how are you?"))
+
 if __name__ == "__main__":
     asyncio.run(main())
     # print(translate_crossval.run("Hello, how are you?"))b
