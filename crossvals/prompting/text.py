@@ -8,10 +8,19 @@ from typing import List
 from crossvals.prompting.protocol import StreamPromptingSynapse, PromptingSynapse
 import asyncio
 
+
 class PromtingCrossValidator(SynapseBasedCrossval):
-    def __init__(self, netuid = 1, wallet_name = 'default', wallet_hotkey = 'default', network = "finney", topk = 1, subtensor = None):
+    def __init__(
+        self,
+        netuid=1,
+        wallet_name="default",
+        wallet_hotkey="default",
+        network="finney",
+        topk=1,
+        subtensor=None,
+    ):
         super().__init__(netuid, wallet_name, wallet_hotkey, network, topk, subtensor)
-        self.dendrite = bt.dendrite( wallet = self.wallet )
+        self.dendrite = bt.dendrite(wallet=self.wallet)
 
     async def process_response(self, uid: int, responses):
         """Process a single response asynchronously."""
@@ -43,10 +52,10 @@ class PromtingCrossValidator(SynapseBasedCrossval):
             )
 
             return failed_synapse
-        
-    async def forward(self, input, timeout):
-        axons = [self.metagraph.axons[i['uid']] for i in self.top_miners]
-        uid = [i['uid'] for i in self.top_miners][0]
+
+    async def forward(self, input: StreamPromptingSynapse, timeout):
+        axons = [self.metagraph.axons[i["uid"]] for i in self.top_miners]
+        uid = [i["uid"] for i in self.top_miners][0]
         responses = await self.dendrite(
             axons=axons,
             synapse=StreamPromptingSynapse(roles=input.roles, messages=input.messages),
@@ -56,19 +65,24 @@ class PromtingCrossValidator(SynapseBasedCrossval):
         )
         responses = await self.process_response(uid, responses)
         return responses
-    
-    async def run(self, private_input):
+
+    async def run(self, private_input: StreamPromptingSynapse):
         response = await self.forward(private_input, timeout=60)
         return response
-    
+
+
 async def main():
     textpromptingCrossval = PromtingCrossValidator()
-    streamingResponse = textpromptingCrossval.run()
-    while True:
-        data = await streamingResponse[0].__anext__()
-        print(data)
-        await asyncio.sleep(1)
+    test_prompt = StreamPromptingSynapse(roles=["user"], messages=["what is bittensor"])
+    streamingResponse = await textpromptingCrossval.run(private_input=test_prompt)
+    print(streamingResponse.completion)
+    # print(streamingResponse)
+    # while True:
+    #     data = await streamingResponse[0].__anext__()
+    #     print(data)
+    #     await asyncio.sleep(1)
     # print(translate_crossval.run("Hello, how are you?"))
+
 
 if __name__ == "__main__":
     asyncio.run(main())
